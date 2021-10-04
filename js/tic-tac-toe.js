@@ -3,6 +3,12 @@ $(document).ready(function(){
 // const playerOne = prompt("Player 1 enter your name:");
 // const playerTwo = prompt("Player 2 enter your name:");
 
+//sounds.
+const selectSound = new Audio('sounds/select-sound.wav');
+const endGameSound = new Audio('sounds/end-game.wav');
+const tieSound = new Audio('sounds/tie-game.wav');
+const resetSound = new Audio('sounds/reset-sound.wav');
+
 const h1 = $("h1");
 let player = 1; //either player 1 or 0.
 const gameContainer = $('table'); //area including all the cells.
@@ -19,6 +25,7 @@ setTimeout(function(){gameAppear()},600);
 
 //eventListener clicking on the cells.
 $(td).on('click', function() {
+  selectSound.play();
   let cell = $(this);
   const state = checked(cell); //ensuring there is nothing in the cell.
 
@@ -47,6 +54,7 @@ $(td).on('click', function() {
       message.html(`Player ` + player + ` has won!` );
       turnMessage.html("")
       setTimeout(function(){noPlay()}, 900);
+      endGameSound.play();
     } else { //if no one has won.
       player = swapPlayer(player);
       displayPlayerTurn(turnMessage, player);}
@@ -64,6 +72,7 @@ $(td).on('click', function() {
         turnMessage.html("");
         $('#tie-message').html(`It's a tie!`);
         setTimeout(function(){noPlay()}, 900);
+        tieSound.play();
       }
     }
 
@@ -168,7 +177,8 @@ const winningCheck = function (gameContainer ,pattern) {
 
 //function to reset the game.
 $('#restart').on('click', function (){
-  window.location.reload();
+  resetSound.play();
+  setTimeout(function(){window.location.reload()},500);
 });
 
 //function to end game once a tie or player has won.
