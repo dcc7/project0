@@ -3,12 +3,13 @@ $(document).ready(function(){
 // const playerOne = prompt("Player 1 enter your name:");
 // const playerTwo = prompt("Player 2 enter your name:");
 
-//sounds.
+//sounds defined. 
 const selectSound = new Audio('sounds/select-sound.wav');
 const endGameSound = new Audio('sounds/end-game.wav');
 const tieSound = new Audio('sounds/tie-game.wav');
 const resetSound = new Audio('sounds/reset-sound.wav');
 
+//getting html elements using jquery.
 const h1 = $("h1");
 let player = 1; //either player 1 or 0.
 const gameContainer = $('table'); //area including all the cells.
@@ -16,21 +17,25 @@ let message = $('#message'); //message variable.
 const turnMessage = $('#turnMessage'); //turn message.
 let td = $("td");
 
-//function to make title appear.
+//function to make title appear upon loading.
 const gameAppear = function (){
   h1.css("color","black").css("transition-duration","2.5s");
   turnMessage.css("color","black").css("transition-duration","2.5s");
 };
-setTimeout(function(){gameAppear()},600);
+setTimeout(function(){gameAppear()},600); //makes title and turn message appear after 600ms.
 
-//eventListener clicking on the cells.
-$(td).on('click', function() {
+
+
+
+
+//Main function. EventListener clicking on the cells.
+$(td).on('click', function() { //td refers to the individual tile. If it is clicked:
   selectSound.play();
   let cell = $(this);
-  const state = checked(cell); //ensuring there is nothing in the cell.
+  const state = checked(cell); //ensuring there is nothing in the cell. Defined on line 86.
 
-  if (!state) { //if nothing is in the cell already then and game hasn't been won yet.
-  let pattern = definePattern(player);
+  if (!state) { //if nothing is in the cell (0) which is false.
+  let pattern = definePattern(player); //defined on line 95, p1 is 'cross', p2 is 'circle'.
 
       if (pattern === 'cross'){
         pattern = 'X';
@@ -39,10 +44,10 @@ $(td).on('click', function() {
         pattern = 'O';
       }
 
-    cell.html(`${ pattern }`);
-    if (!winningCheck(gameContainer, pattern)){
+    cell.html(`${ pattern }`); //add the X or O to the html of the selected tile.
+    if (!winningCheck(gameContainer, pattern)){ //checks if you haven't won. Defined on line 133.
       appear(cell)};
-    addToClass(cell, pattern);
+    addToClass(cell, pattern); //adding the X or O to the class of the selected tile.
 
     if (winningCheck(gameContainer, pattern)){ //check to see if someone has won.
       // if (player === 1){
@@ -53,12 +58,13 @@ $(td).on('click', function() {
       // message.html(`Player ` + name + ` has won!` );
       message.html(`Player ` + player + ` has won!` );
       turnMessage.html("")
-      setTimeout(function(){noPlay()}, 900);
+      setTimeout(function(){noPlay()}, 900); //defined on 186, fades the gameboard out.
       endGameSound.play();
     } else { //if no one has won.
-      player = swapPlayer(player);
+      player = swapPlayer(player); //defined on line 112. Alternates between player 1 and 2.
       displayPlayerTurn(turnMessage, player);}
-      if ($('#0').html() !== "" && //checks if its a tie.
+
+      if ($('#0').html() !== "" && //checks if its a tie, if all cells contain something in html and haven't won.
           $('#1').html() !== "" &&
           $('#2').html() !== "" &&
           $('#3').html() !== "" &&
@@ -74,19 +80,23 @@ $(td).on('click', function() {
         setTimeout(function(){noPlay()}, 900);
         tieSound.play();
       }
-    }
+    } //ending for if statement on line 33.
 
   else { //runs if clicked cell already has something in it.
     message.html(`The box has already been ticked! Try Again.`);
   }
 });
 
+
+
+
+
 //function to check if box is ticked or unticked.
 const checked = function (cell) {
   if (cell.hasClass('X') || cell.hasClass('O')){
-    return 1;
+    return 1; //provides true.
   } else {
-    return 0;
+    return 0; //provides false.
   }
 };
 
@@ -128,7 +138,8 @@ const displayPlayerTurn = function (turnMessage ,player) {
 };
 displayPlayerTurn(turnMessage, player); //say which player before click event.
 
-//need a function to see if the player has won.
+
+//function to check if a player has won.
 const winningCheck = function (gameContainer ,pattern) {
   let won = 0;
   if (gameContainer.find('#0').hasClass(pattern) &&
@@ -175,6 +186,7 @@ const winningCheck = function (gameContainer ,pattern) {
 };
 
 
+
 //function to reset the game.
 $('#restart').on('click', function (){
   resetSound.play();
@@ -194,8 +206,7 @@ const appear = function (cell) {
 };
 
 
-}); //end of ready function at top.
-
+}); //end of document ready function at top.
 
 
 
