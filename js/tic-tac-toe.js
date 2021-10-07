@@ -56,11 +56,15 @@ $(td).on('click', function() {
       turnMessage.html("")
       setTimeout(function(){noPlay()}, 900);
       endGameSound.play();
+<<<<<<< HEAD
     } else { //if no one has won, it is the computers turn.
       player = swapPlayer(player); //no need to swap player anymore, as compMove swaps to two.
       console.log(player);
       displayPlayerTurn(turnMessage, player);
       compMove(); //computer performs its move.
+=======
+    } else { //if no one has won.
+>>>>>>> d8aef8a72239413ec11497a8a18501cd2027864e
       player = swapPlayer(player);
       setTimeout(function(){displayPlayerTurn(turnMessage, player)},900); //swap back to player one.
 
