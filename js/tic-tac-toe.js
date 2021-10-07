@@ -3,7 +3,7 @@ $(document).ready(function(){
 // const playerOne = prompt("Player 1 enter your name:");
 // const playerTwo = prompt("Player 2 enter your name:");
 
-//sounds defined. 
+//sounds defined.
 const selectSound = new Audio('sounds/select-sound.wav');
 const endGameSound = new Audio('sounds/end-game.wav');
 const tieSound = new Audio('sounds/tie-game.wav');
@@ -16,6 +16,7 @@ const gameContainer = $('table'); //area including all the cells.
 let message = $('#message'); //message variable.
 const turnMessage = $('#turnMessage'); //turn message.
 let td = $("td");
+const ticLogo = $("#tictaclogo");
 
 //function to make title appear upon loading.
 const gameAppear = function (){
@@ -204,6 +205,10 @@ const noPlay = function (){
 const appear = function (cell) {
   cell.css('color','darkblue').css("transition-duration","1s");
 };
+
+// $(ticLogo).on('click',function(){
+//   $(ticLogo).css("transform", "rotate(360deg)").css("transition-duration","2s");
+// });
 
 
 }); //end of document ready function at top.
