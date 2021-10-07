@@ -4,7 +4,7 @@
 ## Project Name: Project0
 
 ## Description:
-A game of tic tac toe.
+A game of tic tac toe against an easy computer.
 
 ## Project Link:
 
