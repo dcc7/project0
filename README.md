@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 # Tic Tac Toe
-=======
+
 # Tic Tac Toe#
->>>>>>> 1f410cccda7d19e83aaa97570c2587fed32b48d6
+
 
 ## Project Name: Project0
 
