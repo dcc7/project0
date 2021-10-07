@@ -1,5 +1,4 @@
-$(document).ready(function(){}); //end of ready function at top.
-
+$(document).ready(function(){
 
 // const playerOne = prompt("Player 1 enter your name:");
 // const playerTwo = prompt("Player 2 enter your name:");
@@ -16,7 +15,6 @@ const gameContainer = $('table'); //area including all the cells.
 let message = $('#message'); //message variable.
 const turnMessage = $('#turnMessage'); //turn message.
 let td = $("td");
-let tieMessage = $("#tie-message");
 
 //function to make title appear.
 const gameAppear = function (){
@@ -31,7 +29,7 @@ $(td).on('click', function() {
   let cell = $(this);
   const state = checked(cell); //ensuring there is nothing in the cell.
 
-  if (!state) { //if nothing is in the cell already then.
+  if (!state) { //if nothing is in the cell already then and game hasn't been won yet.
   let pattern = definePattern(player);
 
       if (pattern === 'cross'){
@@ -45,6 +43,7 @@ $(td).on('click', function() {
     if (!winningCheck(gameContainer, pattern)){
       appear(cell)};
     addToClass(cell, pattern);
+
     if (winningCheck(gameContainer, pattern)){ //check to see if someone has won.
       // if (player === 1){
       //   name = playerOne;
@@ -56,57 +55,31 @@ $(td).on('click', function() {
       turnMessage.html("")
       setTimeout(function(){noPlay()}, 900);
       endGameSound.play();
-<<<<<<< HEAD
-    } else { //if no one has won, it is the computers turn.
-      player = swapPlayer(player); //no need to swap player anymore, as compMove swaps to two.
-      console.log(player);
-      displayPlayerTurn(turnMessage, player);
-      compMove(); //computer performs its move.
-=======
     } else { //if no one has won.
->>>>>>> d8aef8a72239413ec11497a8a18501cd2027864e
       player = swapPlayer(player);
-      setTimeout(function(){displayPlayerTurn(turnMessage, player)},900); //swap back to player one.
-
-      pattern = "O"; //since computer will always be O.
-
-      if (winningCheck(gameContainer, pattern)){ //winning check for the computer
-        // if (player === 1){
-        //   name = playerOne;
-        // } else {
-        //   name = playerTwo;
-        // }
-        // message.html(`Player ` + name + ` has won!` );
-        message.html(`Player 2 has won!`);
-        turnMessage.html("")
-        setTimeout(function(){noPlay()}, 2000);
-        setTimeout(function(){endGameSound.play()},350);}
-
-      else if ($('#0').html() !== "" && //checks if its a tie.
-              $('#1').html() !== "" &&
-              $('#2').html() !== "" &&
-              $('#3').html() !== "" &&
-              $('#4').html() !== "" &&
-              $('#5').html() !== "" &&
-              $('#6').html() !== "" &&
-              $('#7').html() !== "" &&
-              $('#8').html() !== "" //&&
-              //!winningCheck(gameContainer, pattern)
+      displayPlayerTurn(turnMessage, player);}
+      if ($('#0').html() !== "" && //checks if its a tie.
+          $('#1').html() !== "" &&
+          $('#2').html() !== "" &&
+          $('#3').html() !== "" &&
+          $('#4').html() !== "" &&
+          $('#5').html() !== "" &&
+          $('#6').html() !== "" &&
+          $('#7').html() !== "" &&
+          $('#8').html() !== "" &&
+          !winningCheck(gameContainer, pattern)
         ) {
         turnMessage.html("");
-        $(tieMessage).html(`It's a tie!`);
+        $('#tie-message').html(`It's a tie!`);
         setTimeout(function(){noPlay()}, 900);
         tieSound.play();
       }
     }
-  }
+
   else { //runs if clicked cell already has something in it.
     message.html(`The box has already been ticked! Try Again.`);
-    setTimeout(function(){message.html("")}, 2000);
   }
 });
-
-
 
 //function to check if box is ticked or unticked.
 const checked = function (cell) {
@@ -213,7 +186,6 @@ const noPlay = function (){
   td.css("color","aliceblue").css("transition-duration","2s");
   message.css('color','#ddd').css("transition-duration","2s");
   turnMessage.html("Please restart to play again!");
-  $(tieMessage).css('color','#ddd');
 }
 
 //function to display X and O slowly in the cell.
@@ -222,63 +194,7 @@ const appear = function (cell) {
 };
 
 
-//Computer algorithm.
-//Function to choose random tile. Computer makes a move by inserting a X or O.
-const compMove = function (){
-
-  const randNum = Math.floor(Math.random() * 10) //generate a random number between 0 and 9.
-  const randNumString = randNum;
-  let tileChoice = `#${randNumString}`;
-
-  if ($(tileChoice).html() === ""){ //if nothing is in the randomly chosen tile, return it or run the function again and choose another tile.
-    let pattern = definePattern(player);// returns cross or circle.
-
-    if (pattern === 'cross'){
-      pattern = 'X';
-    }
-    else {
-      pattern = 'O';
-    }
-
-    $(tileChoice).html(`${ pattern }`); //add to X or O to html of randomly chosen tile.
-
-    if (!winningCheck(gameContainer, pattern) || //if comp hasn't won or
-        $('#0').html() !== "" && //if all the cells are full.
-        $('#1').html() !== "" &&
-        $('#2').html() !== "" &&
-        $('#3').html() !== "" &&
-        $('#4').html() !== "" &&
-        $('#5').html() !== "" &&
-        $('#6').html() !== "" &&
-        $('#7').html() !== "" &&
-        $('#8').html() !== "" &&
-        !winningCheck(gameContainer, pattern)
-  ){
-      let cell = $(tileChoice);
-      setTimeout(function(){appear(cell)},300);
-      addToClass(cell, pattern);};
-  } else if (
-    $('#0').html() === "" || //if any of the cells are empty then run the function again. If all cells contain a move then move on.
-    $('#1').html() === "" ||
-    $('#2').html() === "" ||
-    $('#3').html() === "" ||
-    $('#4').html() === "" ||
-    $('#5').html() === "" ||
-    $('#6').html() === "" ||
-    $('#7').html() === "" ||
-    $('#8').html() === ""
-  ){
-    compMove();
-  } else {
-    console.log('not a resursion error!');
-  }
-};
-
-
-//Problems or Todo List:
-
-
-
+}); //end of ready function at top.
 
 
 
