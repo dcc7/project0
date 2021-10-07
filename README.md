@@ -2,8 +2,8 @@
 
 ## Project Name: Project0
 
-## Description:##
-To design and run successfully a game of tic tac toe.
+## Description:
+A game of tic tac toe against an easy computer.
 
 ## Project Link:##
 
