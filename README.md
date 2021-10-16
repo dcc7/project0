@@ -1,12 +1,13 @@
 
 # Tic Tac Toe
 
-## Project Name: Project0
+Hello!
 
-## Description:
-A game of tic tac toe.
+Welcome to my first SEi project: Tic Tac Toe. This simple game has been written in HTML, CSS and JavaScript.
 
-## Project Link:
+The game is designed to be played on a single device by two players.
+
+If you wish to reset the game, simply click on the 'reset game' button below the grid.
 
 To access the game please click [here](https://dcc7.github.io/project0/)
 
